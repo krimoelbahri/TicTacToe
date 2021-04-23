@@ -1,0 +1,17 @@
+#gameBoardContainer{
+    margin: auto auto;
+    width: 600px;
+    height: 600px;
+    display: grid;
+    grid-template-rows: repeat(3 , 1fr);
+    grid-template-columns: repeat(3 , 1fr);
+    border: 1px solid;
+}
+.spot{
+    border: solid;
+    align-content: center;
+}
+h6{
+    margin: 45% 45%;
+    font-size: x-large;
+}
