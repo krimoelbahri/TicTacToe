@@ -2,64 +2,108 @@ const players = function(name , sign){
     return {name: name , sign: sign}
 }
 const GameBoard =(function(){
-    const gameBoard=[];
-    const gameArray = [];
-    const playerOne = players("Karim", "X");
-    const playerTwo = players("krimo", "O");
+    let gameBoard=[];
+    let gameArray = [];
+    let playerTurn='playerOne'
+    let playerOne = "";
+    let playerTwo = "";
     
-    let spot= document.querySelectorAll('.spot');
-    let i=0;
-
-    const displayBoard = function(e){
-        let spotIndex = e.target.dataset.spot;
-        if(checkSpot(e)==1){
-        playerSign = document.createElement('h6');
-        this.appendChild(playerSign);
-        playerTurn;
-        render(spotIndex);
-        alertWinner();
-        }else{
-            return;
+    const initializeGame =function(){
+        playerOne = "";
+        playerTwo = "";
+        playerTurn='playerOne'
+        gameBoard=[];
+        gameArray = [];
+        
+        const getPlayersNames = function(){
+            let playerOneName = document.getElementById('player-one').value;
+            let playerTwoName = document.getElementById('player-two').value;
+            if (playerOneName == ''){
+                document.getElementById('player-one').placeholder= "please Enter your name";
+            }
+            if (playerTwoName == ''){
+                document.getElementById('player-two').placeholder = 'please Enter your name';
+            }
+            if(playerTwoName!='' && playerOneName!=''){
+            return([playerOneName ,playerTwoName]);
+            }else{
+                return;
+            }
         }
-    }
-
-    spot.forEach (function(target){
-        target.addEventListener("click",displayBoard);
-        });
        
-    const checkSpot= function(a){
-        let i=1;
-        if(a.target.firstChild== null){
-            return(i);
-        }else{
-            return(i=0);
+        const startGame = function(){
+            getPlayersNames();
+            playerOne = players(getPlayersNames()[0], "X");
+            playerTwo = players(getPlayersNames()[1], "O");
+            playRound();
         }
+        document.getElementById('start').addEventListener('click', startGame)
     }
-    const playerTurn= function(){
-        if(i==0){
-            i=1;
-            return (i)
-        } else{
-            i=0;
-            return(i);
-        }
+    const playRound = function() {
+        document.getElementById('game-start').style.display='none'
+        document.getElementById('gameBoardContainer').style.display='grid'
+        document.querySelectorAll('.spot').forEach ((spot)=>{
+            spot.addEventListener("click",function(e){
+                let spotIndex = e.target.dataset.spot;
+                if(e.target.firstChild == null){
+                    render(e, spotIndex);
+                    alertWinner();
+                }else{
+                    return;
+                }  
+            })
+        })
     }
-    const render = function(a){
-         if (playerTurn() == 1){
+
+    const render = function(e,a){
+         if (playerTurn == 'playerOne'){
             gameBoard[a]= playerOne.sign;
             gameArray.push(playerOne.sign);
-            playerSign.innerHTML= playerOne.sign;
+            e.target.innerHTML = playerOne.sign;
+            playerTurn ='playerTwo'
             
         }else{
             gameBoard[a]=playerTwo.sign;
             gameArray.push(playerTwo.sign);
-            playerSign.innerHTML= playerTwo.sign;
+            e.target.innerHTML = playerTwo.sign;
+            playerTurn ='playerOne'
         }
     }
+    const playAgain= function() {
+        document.getElementById('play-again').addEventListener('click', ()=> {
+            document.querySelectorAll('.spot').forEach ((spot)=>{spot.innerHTML=''});
+            document.getElementById('score').style.display='none';
+            document.getElementById('game-start').style.display='flex';
+            initializeGame();
+        })
+    }
     const alertWinner = function(){
-        if (checkWinPlayerOne() == 1){ alert("player one  yaaaaaaay"); return};
-        if (checkWinPlayerTwo() == 1){ alert("player two  yaaaaaaay"); return};
-        if (gameArray.length == 9){ alert("aaaaah its a draww")};
+        let score = document.getElementById('score')
+        if (checkWinPlayerOne() == 1){ 
+            document.getElementById('gameBoardContainer').style.display='none'
+            score.style.display='flex'
+            score.innerHTML= `Congratulations ${playerOne.name} you won
+            <button id="play-again" >Play Again</button>`
+            playAgain();
+            return
+        }
+            
+        if (checkWinPlayerTwo() == 1){ 
+            document.getElementById('gameBoardContainer').style.display='none'
+            score.style.display='flex'
+            score.innerHTML= `Congratulations ${playerTwo.name} you won
+            <button id="play-again" >Play Again</button>`
+           playAgain();
+            return
+        }
+        if (gameArray.length == 9){ 
+            document.getElementById('gameBoardContainer').style.display='none'
+            score.style.display='flex'
+            score.innerHTML= `It's a tie. Good luck next time
+            <button id="play-again" >Play Again</button>`
+           playAgain();
+            return
+        }
     }
     const checkWinPlayerOne = function(){
         if(gameBoard[0]==playerOne.sign && gameBoard[1]== playerOne.sign && gameBoard[2] == playerOne.sign){return(1)}
@@ -81,7 +125,5 @@ const GameBoard =(function(){
         if(gameBoard[0]==playerTwo.sign && gameBoard[4]== playerTwo.sign && gameBoard[8] == playerTwo.sign){return(1)}
         if(gameBoard[6]==playerTwo.sign && gameBoard[4]== playerTwo.sign && gameBoard[2] == playerTwo.sign){return(1)}
     }
-   
-
-return(gameBoard);
+    initializeGame();
 })();

@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <header>
+        <h1>Tic-Tac-Toe</h1>
+    </header>
     <main>
+        <div id="game-start">
+            <div id="players">
+                <label for="playerOne" class="player">
+                    <h2>Player One</h2>
+                    <input type="text" name="playerOne" id="player-one" placeholder="Enter your Name" required>
+                </label>
+                <label for="playerTwo" class="player">
+                    <h2>Player Two</h2>
+                    <input type="text" name="playerTwo" id="player-two" placeholder="Enter your Name" required>
+                </label>
+            </div>
+            <button id="start" >start</button>
+        </div>
         <div id="gameBoardContainer">
             <div class="spot" id="spot1" data-spot="0"></div>
             <div class="spot" id="spot2" data-spot="1"></div>
@@ -20,7 +36,12 @@
             <div class="spot" id="spot8" data-spot="7"></div>
             <div class="spot" id="spot9" data-spot="8"></div>
         </div>
+        <div id="score">
+        </div>
     </main>
+    <footer>
+        <h3>created by <a href="https://github.com/krimoelbahri">Elbahri</a></h3>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
