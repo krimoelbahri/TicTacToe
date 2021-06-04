@@ -1,42 +1,43 @@
 const players = function(name , sign){
     return {name: name , sign: sign}
 }
+
 const GameBoard =(function(){
     let gameBoard=[];
     let gameArray = [];
     let playerTurn='playerOne'
     let playerOne = "";
     let playerTwo = "";
-    
-    const initializeGame =function(){
-        playerOne = "";
-        playerTwo = "";
-        playerTurn='playerOne'
+    const resetData=function(){
         gameBoard=[];
         gameArray = [];
-        
-        const getPlayersNames = function(){
-            let playerOneName = document.getElementById('player-one').value;
-            let playerTwoName = document.getElementById('player-two').value;
-            if (playerOneName == ''){
-                document.getElementById('player-one').placeholder= "please Enter your name";
-            }
-            if (playerTwoName == ''){
-                document.getElementById('player-two').placeholder = 'please Enter your name';
-            }
-            if(playerTwoName!='' && playerOneName!=''){
-            return([playerOneName ,playerTwoName]);
-            }else{
-                return;
-            }
+        playerTurn='playerOne'
+        playerOne = "";
+        playerTwo = "";
+    }
+    const getPlayersNames = function(){
+        let playerOneName = document.getElementById('player-one').value;
+        let playerTwoName = document.getElementById('player-two').value;
+        if (playerOneName == ''){
+            document.getElementById('player-one').placeholder= "please Enter your name";
         }
-       
-        const startGame = function(){
-            getPlayersNames();
-            playerOne = players(getPlayersNames()[0], "X");
-            playerTwo = players(getPlayersNames()[1], "O");
-            playRound();
+        if (playerTwoName == ''){
+            document.getElementById('player-two').placeholder = 'please Enter your name';
         }
+        if(playerTwoName!='' && playerOneName!=''){
+        return([playerOneName ,playerTwoName]);
+        }else{
+            return;
+        }
+    }
+    const startGame = function(){
+        getPlayersNames();
+        playerOne = players(getPlayersNames()[0], "X");
+        playerTwo = players(getPlayersNames()[1], "O");
+        playRound();
+    }
+    const initializeGame =function(){
+        resetData(); 
         document.getElementById('start').addEventListener('click', startGame)
     }
     const playRound = function() {
