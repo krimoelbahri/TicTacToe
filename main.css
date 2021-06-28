@@ -10,7 +10,7 @@ body {
 	height: 100%;
 }
 header {
-	margin: 35px auto;
+	margin: 25px auto;
 	color: #ce1212;
 	background-color: transparent;
 	font-size: xxx-large;
@@ -50,8 +50,8 @@ h2 {
 	font-weight: bold;
 }
 #gameBoardContainer {
-	width: 40vmax;
-	height: 40vmax;
+	width: 35vmax;
+	height: 35vmax;
 	display: none;
 	grid-template-rows: repeat(3, 1fr);
 	grid-template-columns: repeat(3, 1fr);
