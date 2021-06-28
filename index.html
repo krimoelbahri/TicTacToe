@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -12,7 +13,7 @@
         <h1>Tic-Tac-Toe</h1>
     </header>
     <main>
-        <div id="game-start">
+        <form id="game-start" name="submit">
             <div id="players">
                 <label for="playerOne" class="player">
                     <h2>Player One</h2>
@@ -23,8 +24,8 @@
                     <input type="text" name="playerTwo" id="player-two" placeholder="Enter your Name" required>
                 </label>
             </div>
-            <button id="start" >start</button>
-        </div>
+            <button type="submit" id="start" >start</button>
+        </form>
         <div id="gameBoardContainer">
             <div class="spot" id="spot1" data-spot="0"></div>
             <div class="spot" id="spot2" data-spot="1"></div>
@@ -40,7 +41,7 @@
         </div>
     </main>
     <footer>
-        <h3>created by <a href="https://github.com/krimoelbahri">Elbahri</a></h3>
+        <p>Copyright © Created by <a href=https://github.com/krimoelbahri> Elbahri </a>. TOP project</p>
     </footer>
     <script src="script.js"></script>
 </body>
