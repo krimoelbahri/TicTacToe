@@ -63,7 +63,7 @@ h2 {
 	height: 50%;
 	width: 100%;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 	flex-direction: column;
 }
 #players {
@@ -71,7 +71,7 @@ h2 {
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	height: 30%;
+	height: 50%;
 	width: 80%;
 }
 
@@ -116,5 +116,6 @@ h2 {
 @media (max-width: 500px) {
 	#players {
 		flex-direction: column;
+		height: 80%;
 	}
 }
